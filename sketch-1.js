@@ -8,19 +8,16 @@ let dImg;
 let sound;
 let sound2;
 let sound3;
-let tasks = ['Separate daal', 'Wash a utensil.', 'Guard will help you fix your sleeves.', 'Fold the clothes.']
-
 
 let tree = [];
 let obstacles = [];
 let start;
 let gameState = 'START';
+let gameOver = 'Game Over.'
 
 function preload() {
   bImg = loadImage('assets/2.gif');
-  cImg1 = loadImage('assets/clouds1.png');
-  sImg = loadImage('assets/sun.png');
-  buImg = loadImage('assets/button.png');
+  buImg = loadImage('assets/brick.png');
   dImg = loadImage('assets/d.gif');
   sound = loadSound('assets/jump.wav');
   sound1 = loadSound('assets/out1.wav');
@@ -63,11 +60,10 @@ function reset(){
   gameState = 'START';
   background(bImg);
   men = new Men();
-  image(sImg, 100, 90, 90, 90)
   
   push();
-  fill(255);
-  textSize(32);
+  fill(0);
+  textSize(30);
   text('press space to PLAY', width/2, height/2);
   pop();
 }
@@ -75,8 +71,8 @@ function reset(){
 function startGame(){
   men.show();
   push();
-  fill(255);
-  textSize(32);
+  fill(0);
+  textSize(30);
   text('press space to PLAY', width/2, height/2);
   pop();
     
@@ -88,7 +84,6 @@ function startGame(){
 
 function playGame(){
   background(bImg);
-  image(sImg, 100, 90, 90, 90)
   men.show();
   men.move();
   
@@ -113,12 +108,11 @@ function playGame(){
     
    if (men.hits(o)){
     sound1.play();
-    let task = random(tasks); 
     textSize(30);
-    fill(255)
-    strokeWeight(5);
+    fill(0)
+    strokeWeight(10);
     textAlign(CENTER, CENTER);
-    text(task,width/2, height/2); 
+    text(gameOver,width/2, height/2); 
     gameState = 'END';   
    }
   }
