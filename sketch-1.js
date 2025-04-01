@@ -19,6 +19,7 @@ function preload() {
   bImg = loadImage('assets/2.gif');
   buImg = loadImage('assets/brick.png');
   dImg = loadImage('assets/d.gif');
+  coinImg = loadImage('assets/coin.png');
   sound = loadSound('assets/jump.wav');
   sound1 = loadSound('assets/out1.wav');
   sound2 = loadSound('assets/out2.wav');
@@ -33,6 +34,15 @@ function setup() {
   // reset button. NOTE: spacebar also works as reset. 
   var button = createButton('reset');
   button.mousePressed(reset);
+
+    //Coins
+
+  coins = new Group();
+  coins.spriteSheet = coinImg;
+  coins.addAni({ w: 16, h: 16, frames: 14 });
+  coins.tile = "c";
+  coins.collider = "s";
+  coins.layer = 0;
 }
 
 
