@@ -8,6 +8,10 @@ class Men {
   
  } 
   
+  setGravity(g) {
+    this.gravity = g;
+  }
+  
   jump() {
     if (this.y == 673 - this.r - 65){
        this.vy = -25;
@@ -30,7 +34,7 @@ class Men {
   }
   
   show() {
-    image(dImg, this.x, this.y - 80, 80, 110)
+    image(dImg, this.x, this.y - 60, 80, 110)
   }
    
 }
