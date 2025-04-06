@@ -2,7 +2,7 @@ class Men {
  constructor() {
    this.r = 70;
    this.x = this.r + 120;
-   this.y = 673 - this.r;
+   this.y = 620  - this.r;
    this.vy = 0;
    this.gravity = 0.85;
   
@@ -23,6 +23,7 @@ class Men {
     
   }
   
+  
   move() {
     this.y += this.vy;
     this.vy += this.gravity;
@@ -30,7 +31,7 @@ class Men {
   }
   
   show() {
-    image(dImg, this.x, this.y - 80, 80, 110)
+    image(dImg, this.x, this.y - 63, 80, 110)
   }
    
 }

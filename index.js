@@ -23,6 +23,7 @@ class Men {
     
   }
   
+  
   move() {
     this.y += this.vy;
     this.vy += this.gravity;
