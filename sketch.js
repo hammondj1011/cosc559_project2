@@ -9,33 +9,35 @@ let sound;
 let sound2;
 let sound3;
 
-
 let tree = [];
 let obstacles = [];
+let coins = [];
 let start;
 let gameState = 'START';
-let gameOver = 'GAME OVER'
-
+let gameOver = 'Game Over.'
 
 function preload() {
   bImg = loadImage('assets/2.gif');
-   buImg = loadImage('assets/brick.png');
-  //dImg = loadImage('assets/d.gif');
+  buImg = loadImage('assets/brick.png');
   dImg = loadImage('assets/super_mario.gif');
   sound = loadSound('assets/jump.wav');
   sound1 = loadSound('assets/out1.wav');
   sound2 = loadSound('assets/out2.wav');
+  coinSound = loadSound('assets/coin.wav');
+  coinImg = loadImage('assets/coin3.jpeg');
 }
 
 
 
 //start code
 function setup() {
+  score = 0;
   createCanvas(1021, 673);
   reset();
   // reset button. NOTE: spacebar also works as reset. 
   var button = createButton('reset');
   button.mousePressed(reset);
+  
 }
 
 
@@ -65,9 +67,9 @@ function reset(){
   men = new Men();
   
   push();
-  fill();
+  fill(0);
   textSize(30);
-  text('press SPACE to PLAY', width/2, height/2);
+  text('press space to PLAY', width/2, height/2);
   pop();
 }
 
@@ -76,7 +78,7 @@ function startGame(){
   push();
   fill(0);
   textSize(30);
-  text('press SPACE to PLAY', width/2, height/2);
+  text('press space to PLAY', width/2, height/2);
   pop();
     
   if (keyIsPressed && key == ' '){
@@ -87,12 +89,16 @@ function startGame(){
 
 function playGame(){
   background(bImg);
+  textSize(30);
+  fill(255);
+  text("Score: " + score, 60, 30);
   men.show();
   men.move();
   
   if (keyIsPressed && key == ' '){
     men.jump();
     sound.play();
+    
   }
   
   
@@ -103,6 +109,10 @@ function playGame(){
   
   if (random(1) < 0.0005){
     tree.push(new Trees());
+  }
+  
+    if (random(1) < 0.008){
+    coins.push(new Coins());
   }
   
   for (let o of obstacles){
@@ -119,6 +129,19 @@ function playGame(){
     gameState = 'END';   
    }
   }
+  
+    for (let c of coins){
+    c.show();
+    c.move();
+       
+   if (men.hits(c)){
+    coinSound.play();
+    score = score + 1;
+    c.destroy(); 
+    
+   
+   }
+  }
 }
 
 function endGame(){    
@@ -126,7 +149,13 @@ function endGame(){
     obstacles.pop(o);
   }
   
-  if (keyIsPressed && key == ' '){
-    reset();
+    for (let c in coins){
+    coins.pop(c);
   }
+  
+  score = 0;
+  
+  //if (keyIsPressed && key == ' '){
+   // reset();
+ // }
 }
