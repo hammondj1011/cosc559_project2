@@ -2,15 +2,11 @@ class Men {
  constructor() {
    this.r = 70;
    this.x = this.r + 120;
-   this.y = 620  - this.r;
+   this.y = 673 - this.r;
    this.vy = 0;
    this.gravity = 0.85;
   
  } 
-  
-  setGravity(g) {
-    this.gravity = g;
-  }
   
   jump() {
     if (this.y == 673 - this.r - 65){
@@ -35,7 +31,7 @@ class Men {
   }
   
   show() {
-    image(dImg, this.x, this.y - 60, 80, 110)
+    image(dImg, this.x, this.y - 80, 80, 110)
   }
    
 }

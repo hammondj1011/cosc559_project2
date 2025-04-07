@@ -9,9 +9,9 @@ let sound;
 let sound2;
 let sound3;
 
-
 let tree = [];
 let obstacles = [];
+let coins = [];
 let start;
 let gameState = 'START';
 let gameOver = 'GAME OVER';
@@ -24,14 +24,19 @@ function preload() {
   //dImg = loadImage('assets/d.gif');
   dImg = loadImage('assets/super_mario.gif');
   sound = loadSound('assets/jump.wav');
+  marioJump = loadSound('assets/smb_jump-small.wav')
   sound1 = loadSound('assets/out1.wav');
   sound2 = loadSound('assets/out2.wav');
+  endSound = loadSound('assets/smb_mariodie.wav');
+  coinSound = loadSound('assets/coin.wav');
+  coinImg = loadImage('assets/coin3.jpeg');
 }
 
 
 
 //start code
 function setup() {
+  score = 0;
   createCanvas(1021, 673);
   reset();
   // reset button. NOTE: spacebar also works as reset. 
@@ -80,8 +85,9 @@ function reset(){
   
   push();
   fill(0);
+  fill(0);
   textSize(30);
-  text('press SPACE to PLAY', width/2, height/2);
+  text('press space to PLAY', width/2, height/2);
   pop();
 }
 
@@ -90,7 +96,7 @@ function startGame(){
   push();
   fill(0);
   textSize(30);
-  text('press SPACE to PLAY', width/2, height/2);
+  text('press space to PLAY', width/2, height/2);
   pop();
     
   if (keyIsPressed && key == ' '){
@@ -101,12 +107,16 @@ function startGame(){
 
 function playGame(){
   background(bImg);
+  textSize(30);
+  fill(255);
+  text("Score: " + score, 60, 30);
   men.show();
   men.move();
   
   if (keyIsPressed && key == ' '){
     men.jump();
-    sound.play();
+    marioJump.play();
+    
   }
   
   
@@ -120,13 +130,27 @@ function playGame(){
     o.move();
     
    if (men.hits(o)){
-    sound1.play();
+    //sound1.play();
+    endSound.play();
     textSize(30);
     fill(0)
     strokeWeight(10);
     textAlign(CENTER, CENTER);
     text(gameOver,width/2, height/2); 
     gameState = 'END';   
+   }
+  }
+  
+    for (let c of coins){
+    c.show();
+    c.move();
+       
+   if (men.hits(c)){
+    coinSound.play();
+    score = score + 1;
+    c.destroy(); 
+    
+   
    }
   }
 }
@@ -136,7 +160,13 @@ function endGame(){
     obstacles.pop(o);
   }
   
-  if (keyIsPressed && key == ' '){
-    reset();
+    for (let c in coins){
+    coins.pop(c);
   }
+  
+  score = 0;
+  
+  //if (keyIsPressed && key == ' '){
+   // reset();
+ // }
 }
