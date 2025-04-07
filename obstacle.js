@@ -1,7 +1,7 @@
 class Obstacle {
   constructor(x, y, r){
     this.x = width
-    this.y = height-130
+    this.y = height - 120
     this.r = 70
     
   }
@@ -14,7 +14,7 @@ class Obstacle {
   }
   
   move(){
-    this.x -= 7;
+    this.x -= 6;
   }
   
   destroy(){
