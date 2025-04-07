@@ -21,8 +21,10 @@ function preload() {
   buImg = loadImage('assets/brick.png');
   dImg = loadImage('assets/super_mario.gif');
   sound = loadSound('assets/jump.wav');
+  marioJump = loadSound('assets/smb_jump-small.wav')
   sound1 = loadSound('assets/out1.wav');
   sound2 = loadSound('assets/out2.wav');
+  endSound = loadSound('assets/smb_mariodie.wav');
   coinSound = loadSound('assets/coin.wav');
   coinImg = loadImage('assets/coin3.jpeg');
 }
@@ -97,7 +99,7 @@ function playGame(){
   
   if (keyIsPressed && key == ' '){
     men.jump();
-    sound.play();
+    marioJump.play();
     
   }
   
@@ -120,7 +122,8 @@ function playGame(){
     o.move();
     
    if (men.hits(o)){
-    sound1.play();
+    //sound1.play();
+    endSound.play();
     textSize(30);
     fill(0)
     strokeWeight(10);
