@@ -14,7 +14,7 @@ let obstacles = [];
 let coins = [];
 let start;
 let gameState = 'START';
-let gameOver = 'GAME OVER';
+let gameOver = 'Game Over';
 let spaceMode = false;
 let spaceToggleCheckbox;
 
@@ -122,6 +122,10 @@ function playGame(){
   
   if (random(1) < 0.01){
     obstacles.push(new Obstacle());
+  }
+
+  if (random(1) < 0.008){
+    coins.push(new Coins());
   }
   
   
